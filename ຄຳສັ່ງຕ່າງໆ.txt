@@ -1,0 +1,21 @@
+- ຄຳສັ່ງ Run Serve: php artisan serve
+- ຄຳສັ່ງ Run Dev ເພື່ອຄອມພາຍ ໂປຼເຈັກ: npm run Dev
+- ຄຳສັ່ງ Run Watch ຕິດຕາມການປ່ຽນແປງ ຂອງ Vue ແລ້ວທຳການ ຄອມພາຍ: npm run Watch
+
++ ຄຳສັ່ງ Git & GitHub ພື້ນຖານ
+
+- git init                  ==> ເປັນການລົງທະບຽນ ໂຟນເດີ້ໂປຼເຈັກເຂົ້າໃນ Git
+- git add 'ຊື່ໄຟລ໌'            ==> ເປັນການເພີ່ມໄຟລ໌ ເຂົ້າໃນ Git
+- git commit -m "ຄຳອະທິບາຍ"  ==> ເປັນການ ຄອມມິດ ພ້ອມດ້ວຍຄຳອະທິບາຍ
+- git branch -M main        ==> ກຳນົດສາຂາຫຼັກ
+- git remote add origin https://github.com/SornDevT/test-app-03.git ==> ເປັນການເຊີ່ອມ ໂຟເດີ້ໂປຼເຈັກ ກັບ Repository
+- git push -u origin main   ==> ເປັນການ ອັບໂຫຼດໂປຼເຈັກຄັ້ງທຳອິດຂື້ນ GitHub ຄັ້ງທຳອິດ
+
+- git add .     ==> ເພີ່ມໄຟລ໌ໃໝ່ທັງໝົດ ເຂົ້າໃນ Git
+- git push      ==> ອັບໂຫຼດໂປຼເຈັກຄັ້ງທຳອິດຂື້ນ GitHub ປົກກະຕິ
+- git pull      ==> ເປັນການອັບເດດ ຊ໋ອດໂຄດໂປຼເຈັກລ່າສຸດ ຈາກ GitHub
+- git clone 'ໃສ່ທີ່ຢູ່ຂອງ Repository'    ==> ເປັນການ Clone ໂປຼເຈັກຈາກ GitHub ລົງມາໃນເຄື່ອງເຮົາ
+
++ ວິທີຂຽນ Git ແບບຫຍໍ້
+
+- git add . && git commit -m "ຄຳອະທິບາຍ" && git push
