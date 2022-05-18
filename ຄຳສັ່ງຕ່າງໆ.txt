@@ -1,6 +1,8 @@
++ ຄຳສັ່ງ Laravel
 - ຄຳສັ່ງ Run Serve: php artisan serve
 - ຄຳສັ່ງ Run Dev ເພື່ອຄອມພາຍ ໂປຼເຈັກ: npm run Dev
 - ຄຳສັ່ງ Run Watch ຕິດຕາມການປ່ຽນແປງ ຂອງ Vue ແລ້ວທຳການ ຄອມພາຍ: npm run Watch
+- ຄຳສັ່ງ ສ້າງ Key App: php artisan key:generate
 
 + ຄຳສັ່ງ Git & GitHub ພື້ນຖານ
 
