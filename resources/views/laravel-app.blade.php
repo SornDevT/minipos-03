@@ -7,6 +7,8 @@
     <title>Laravel + Vue</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+    <link rel="stylesheet" href="assets/css/font_lao.css">
+    
     <!-- Favicon -->
 		<link rel="icon" href="assets/img/brand/favicon.png" type="image/x-icon"/>
 
