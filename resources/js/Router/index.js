@@ -7,7 +7,20 @@ import Transection from "../Pages/Tramsection.vue";
 import Report from "../Pages/Report.vue";
 import NoPage from "../Pages/Nopage.vue";
 
+import Login from "../Pages/Login.vue";
+import Register from "../Pages/Register.vue";
+
 const routes = [
+    {
+        name: "login",
+        path:"/login",
+        component: Login
+    },
+    {
+        name: "register",
+        path:"/register",
+        component: Register
+    },
     {
         name: "home",
         path:"/",

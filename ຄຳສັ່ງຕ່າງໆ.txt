@@ -3,6 +3,10 @@
 - ຄຳສັ່ງ Run Dev ເພື່ອຄອມພາຍ ໂປຼເຈັກ: npm run Dev
 - ຄຳສັ່ງ Run Watch ຕິດຕາມການປ່ຽນແປງ ຂອງ Vue ແລ້ວທຳການ ຄອມພາຍ: npm run Watch
 - ຄຳສັ່ງ ສ້າງ Key App: php artisan key:generate
+- ຄຳສັ່ງສ້າງ Model ທີ່ຊື່ Store ແລະ -m ແມ່ນການສ້າງໄຟລ໌ ຕາຕະລາງ ໃນ migrations ຄຳສັ່ງ: php artisan make:model -m Store
+- ຄຳສັ່ງໃນການສ້າງ Controller ຊື່ StoreController, API ຈະເປັນໂຟນເດີ້,  ຄຳສັ່ງ: php artisan make:controller API/StoreController
+- ຄຳສັ່ງໃນການ Generate ສ້າງຕາຕະລາງ ເຂົ້າຖານຂໍ້ມູນ MySQL ຄຳສັ່ງ: php artisan migrate 
+
 
 + ຄຳສັ່ງ Git & GitHub ພື້ນຖານ
 
@@ -21,3 +25,5 @@
 + ວິທີຂຽນ Git ແບບຫຍໍ້
 
 - git add . && git commit -m "ຄຳອະທິບາຍ" && git push
+
+

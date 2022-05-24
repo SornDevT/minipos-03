@@ -45,6 +45,28 @@
 </head>
 <body class="main-body app sidebar-mini">
 
+
+		@if(Auth::check())
+			@php
+			$user_auth_data = [
+				'isLoggedin_laravel' => true,
+				'user' =>  Auth::user(),
+				'urlpath' =>'',
+			];
+			@endphp
+		@else
+			@php
+			$user_auth_data = [
+				'isLoggedin_laravel' => false
+			];
+			@endphp
+		@endif
+		
+		<script>
+			window.Laravel = JSON.parse(atob('{{ base64_encode(json_encode($user_auth_data)) }}'));
+		</script>
+
+
 <div id="vue-app"></div>
 		<!-- Loader -->
 		<!-- <div id="global-loader">

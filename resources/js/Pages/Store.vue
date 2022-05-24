@@ -113,7 +113,7 @@
 						<div class="card mg-b-20">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="mg-b-0"> ລາຍການ ສ໋ອກສິນຄ້າ | check_form: {{check_form}}</h4>
+									<h4 class="mg-b-0"> ລາຍການ ສ໋ອກສິນຄ້າ <!-- | check_form: {{check_form}} --></h4>
                                     <span > 
                                         <button class="btn btn-info-gradient new-btn mx-1" v-if="!FormShow" @click="add_product()" >ເພີ່ມໃໝ່</button>
                                         <button class="btn btn-success-gradient new-btn mx-1" :class="check_form" v-if="FormShow" @click="save_product()" >ບັນທຶກ</button>
@@ -123,36 +123,35 @@
 								<p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn
 										more</a></p>
 							</div>
-							<div class="card-body"> {{FormProduct}}
+							<div class="card-body">
+								<!-- {{FormProduct}}
 								<hr>
-								{{ FormData }}
+								 {{ FormData }} -->
                                 <div class="row" v-if="FormShow" >
                                     <div class="col-md-3">
                                             aa
                                     </div>
                                     <div class="col-md-9">
+					
                                             <div class="form-group">
 												<label for="product_name">ຊື່ສິນຄ້າ <span class=" text-danger">*</span></label>
 												<input type="text" class="form-control" id="product_name" v-model="FormProduct.name" placeholder="ປ້ອນຊື່ສິນຄ້າ...">
 											</div>
                                             <div class="form-group">
 												<label for="product_amount">ຈຳນວນ <span class=" text-danger">*</span></label>
-												<input type="number" class="form-control" id="product_amount" v-model="FormProduct.amount" placeholder="ປ້ອນຈຳນວນສິນຄ້າ...">
+												<cleave :options="options" class="form-control" id="product_amount" v-model="FormProduct.amount" placeholder="ປ້ອນຈຳນວນສິນຄ້າ..." />
 											</div>
-
                                         <div class="row">
-
-                                        
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="product_buy">ລາຄາຊື້ <span class=" text-danger">*</span></label>
-                                                    <input type="number" class="form-control" id="product_buy" v-model="FormProduct.price_buy" placeholder="ປ້ອນລາຄາຊື້...">
+                                                    <cleave :options="options" class="form-control" id="product_buy" v-model="FormProduct.price_buy" placeholder="ປ້ອນລາຄາຊື້..."/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="product_sell">ລາຄາຂາຍ <span class=" text-danger">*</span></label>
-                                                    <input type="number" class="form-control" id="product_sell" v-model="FormProduct.price_sell" placeholder="ປ້ອນລາຄາຂາຍ...">
+                                                    <cleave :options="options" class="form-control" id="product_sell" v-model="FormProduct.price_sell" placeholder="ປ້ອນລາຄາຂາຍ..."/>
                                                 </div>
                                             </div>
                                             </div>
@@ -199,6 +198,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'MyWebAppStore',
 
@@ -214,6 +214,17 @@ export default {
                 price_sell:""
             },
 			FormData: [{ "id": 210, "name": "ເກີບຜ້າໃບ", "amount": "12", "price_buy": "30000", "price_sell": "60000" }, { "id": 401, "name": "ໂສ້ງຂາຍາວ", "amount": "23", "price_buy": "120000", "price_sell": "150000" }, { "id": 53, "name": "ເບ້ຍລາວ", "amount": "120", "price_buy": "12000", "price_sell": "14000" }, { "id": 725, "name": "ນ້ຳມັນພຶດ", "amount": "300", "price_buy": "12000", "price_sell": "15000" } ],
+			options:{
+				   // prefix: '$',
+					numeral: true,
+					numeralPositiveOnly: true,
+					noImmediatePrefix: true,
+					rawValueTrimPrefix: true,
+					numeralIntegerScale: 10,
+					numeralDecimalScale: 2,
+					numeralDecimalMark: '.',
+					delimiter: ','
+			},
         };
     },
 
@@ -233,7 +244,7 @@ export default {
     methods: {
         add_product(){
 			
-			this.$swal('ເພີ່ມຂໍ້ມູນໃໝ່!!!');
+			///this.$swal('ເພີ່ມຂໍ້ມູນໃໝ່!!!');
 
             this.FormShow = true
         },
@@ -256,10 +267,19 @@ export default {
 					});
 			} else { // ຖ້າ FormType ບໍ່ເທົ່າ True ( FormType = false ) ໃຫ້ທຳການອັບເດດ ຂໍ້ມູນ ໂດຍອ້າງອິງຈາກ FormID
 
-				this.FormData.find((i)=>i.id == this.FormID).name = this.FormProduct.name;
-				this.FormData.find((i)=>i.id == this.FormID).amount = this.FormProduct.amount;
-				this.FormData.find((i)=>i.id == this.FormID).price_buy = this.FormProduct.price_buy;
-				this.FormData.find((i)=>i.id == this.FormID).price_sell = this.FormProduct.price_sell;
+				
+				// this.FormData.find((i)=>i.id == this.FormID).name = this.FormProduct.name;
+				// this.FormData.find((i)=>i.id == this.FormID).amount = this.FormProduct.amount;
+				// this.FormData.find((i)=>i.id == this.FormID).price_buy = this.FormProduct.price_buy;
+				// this.FormData.find((i)=>i.id == this.FormID).price_sell = this.FormProduct.price_sell;
+				
+
+				let fdata = this.FormData.find((i)=>i.id == this.FormID);
+
+				fdata.name = this.FormProduct.name;
+				fdata.amount = this.FormProduct.amount;
+				fdata.price_buy = this.FormProduct.price_buy;
+				fdata.price_sell = this.FormProduct.price_sell;
 
 			}
 
