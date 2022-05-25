@@ -45,6 +45,13 @@ export default {
     methods: {
         
     },
+	beforeRouteEnter(to, from, next){
+			if(!window.Laravel.isLoggedin_laravel){
+				window.location.href = "/login";
+			}
+
+			next();
+	}
 };
 </script>
 

@@ -345,8 +345,6 @@ export default {
 				'ຂໍ້ມູນໄດ້ຖຶກລຶບແລ້ວ.',
 				'success'
 				);
-
-
 			}
 			});
 			
@@ -357,6 +355,14 @@ export default {
 			return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		},
     },
+
+	beforeRouteEnter(to, from, next){
+			if(!window.Laravel.isLoggedin_laravel){
+				window.location.href = "/login";
+			}
+
+			next();
+	}
 };
 </script>
 

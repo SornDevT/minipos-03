@@ -89,12 +89,11 @@ export default {
 
                         /// ທຳການຍິງຂໍ້ມູນ ສົ່ງໄປ Back-end ໂດຍໃຊ້ axios
                         this.$axios.post("api/register",
-                        {
-                            re_name: this.name,
+                        {   re_name: this.name,
                             re_email: this.email,
                             re_password: this.password
-
                         }).then((response) => {
+                            
                             if(response.data.success){
                                 this.$router.push('login'); // ໄປໜ້າ Login
                             } else {
@@ -112,6 +111,13 @@ export default {
             }
         }
     },
+    beforeRouteEnter(to, from, next){
+			if(window.Laravel.isLoggedin_laravel){
+				window.location.href = "/store";
+			}
+
+			next();
+	}
 };
 </script>
 

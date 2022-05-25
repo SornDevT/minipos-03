@@ -616,7 +616,7 @@
                     <a class="dropdown-item" href=""
                       ><i class="bx bx-slider-alt"></i> Account Settings</a
                     >
-                    <a class="dropdown-item" href="signin.html"
+                    <a class="dropdown-item" href="#" @click="Logout()"
                       ><i class="bx bx-log-out"></i> Sign Out</a
                     >
                   </div>
@@ -1703,10 +1703,22 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    Logout(){
+                    this.$axios.post("api/logout").then((response) => {
+                            if(response.data.success){
+                                window.location.href = "/" // ໄປໜ້າທຳອິດ
+                            } else {
+                              console.log(response.data.message);
+                            }
+                        }).cath(function(error){
+                            console.error(error);
+                        });
+    }
+  },
   created(){
 
-    console.log(window.Laravel.isLoggedin_laravel);
+    console.log("ສະຖານະ Login: "+window.Laravel.isLoggedin_laravel);
 
 
     if(window.Laravel.isLoggedin_laravel){

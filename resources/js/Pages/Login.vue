@@ -27,15 +27,22 @@
 												<div class="main-signup-header">
 													<h2>ສະບາຍດີ!</h2>
 													<h5 class="fw-semibold mb-4">ກະລຸນາເຂົ້າສູ່ລະບົບ.</h5>
-													<form action="#">
+												
 														<div class="form-group">
-															<label>ອີເມວລ໌</label> <input class="form-control" placeholder="ປ້ອນອີເມວລ໌ ຂອງທ່ານ..." type="text">
+															<label>ອີເມວລ໌</label> <input class="form-control" placeholder="ປ້ອນອີເມວລ໌ ຂອງທ່ານ..." type="text" v-model="email">
 														</div>
 														<div class="form-group">
-															<label>ລະຫັດຜ່ານ</label> <input class="form-control" placeholder="ປ້ອນລະຫັດຜ່ານ ຂອງທ່ານ..." type="password">
-														</div><button class="btn btn-main-primary btn-block">ເຂົ້າສູ່ລະບົບ</button>
+															<label>ລະຫັດຜ່ານ</label> <input class="form-control" placeholder="ປ້ອນລະຫັດຜ່ານ ຂອງທ່ານ..." type="password" v-model="password">
+														</div><button class="btn btn-main-primary btn-block" @click="Login()">ເຂົ້າສູ່ລະບົບ</button>
+
+														<div class="alert alert-warning mt-2" role="alert" v-if="ShowError">
+                                                        <button aria-label="Close" class="close" data-bs-dismiss="alert" type="button">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <strong>ແຈ້ງເຕືອນ!</strong> {{texterror}}
+                                                    </div>
 														
-													</form>
+												
 													<div class="main-signin-footer mt-5">
 														
 														<p>ຍັງບໍ່ມີບັນຊີຜູ້ໃຊ້? <router-link to="/register">ລົງທະບຽນໃໝ່</router-link></p>
@@ -58,7 +65,10 @@ export default {
 
     data() {
         return {
-            
+            email:'',
+			password:'',
+			ShowError:false,
+			texterror:''
         };
     },
 
@@ -67,8 +77,44 @@ export default {
     },
 
     methods: {
-        
+        Login(){
+
+			if(this.email != "" && this.password !=""){
+
+				this.ShowError = false;
+				this.texterror = "";
+				
+					this.$axios.post("api/login",
+                        {   
+                            login_email: this.email,
+                            login_password: this.password
+                        }).then((response) => {
+                            
+                            if(response.data.success){
+                                //this.$router.push('login'); // ໄປໜ້າ Login
+								window.location.href = "/store";
+                            } else {
+                                this.ShowError = true;
+                                this.texterror = response.data.message;
+                            }
+                        }).cath(function(error){
+                            console.error(error);
+                        });
+
+
+			} else {
+				this.ShowError = true;
+				this.texterror = "ກະລຸນາປ້ອນ ອີເມວລ໌ ແລະ ລະຫັດຜ່ານ!";
+			}
+		}
     },
+	beforeRouteEnter(to, from, next){
+			if(window.Laravel.isLoggedin_laravel){
+				window.location.href = "/store";
+			}
+
+			next();
+	}
 };
 </script>
 
