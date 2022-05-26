@@ -129,7 +129,8 @@
 								 {{ FormData }} -->
                                 <div class="row" v-if="FormShow" >
                                     <div class="col-md-3">
-                                            aa
+                                            <img :src="imagePreview" alt="">
+											<input type="file" @change="onSeclected" class="mt-2" >
                                     </div>
                                     <div class="col-md-9">
 					
@@ -204,6 +205,8 @@ export default {
 
     data() {
         return {
+			imagePreview: window.location.origin + '/assets/img/add-image.jpg',
+			imageProduct:'',
             FormShow: false,
 			FormType: true,
 			FormID:'',
@@ -213,7 +216,7 @@ export default {
                 price_buy:"",
                 price_sell:""
             },
-			FormData: [{ "id": 210, "name": "ເກີບຜ້າໃບ", "amount": "12", "price_buy": "30000", "price_sell": "60000" }, { "id": 401, "name": "ໂສ້ງຂາຍາວ", "amount": "23", "price_buy": "120000", "price_sell": "150000" }, { "id": 53, "name": "ເບ້ຍລາວ", "amount": "120", "price_buy": "12000", "price_sell": "14000" }, { "id": 725, "name": "ນ້ຳມັນພຶດ", "amount": "300", "price_buy": "12000", "price_sell": "15000" } ],
+			FormData: [],
 			options:{
 				   // prefix: '$',
 					numeral: true,
@@ -242,6 +245,30 @@ export default {
 		}
 	},
     methods: {
+		onSeclected(event){
+				console.log(event.target.files[0]);
+
+				this.imageProduct = event.target.files[0];
+				let reader = new FileReader();
+				reader.readAsDataURL(this.imageProduct);
+				reader.addEventListener("load", function(){
+					this.imagePreview = reader.result;
+				}.bind(this), false);
+		},
+		GetStore(){
+
+			this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+
+				this.$axios.get('/api/store')
+				.then((response)=>{
+						this.FormData = response.data;
+				}).catch((error)=>{
+					console.log(error);
+				})
+
+			});
+
+		},
         add_product(){
 			
 			///this.$swal('ເພີ່ມຂໍ້ມູນໃໝ່!!!');
@@ -258,13 +285,40 @@ export default {
 			if(this.FormType){  // ຖ້າ FormType = true ໃຫ້ທຳການບັນທຶກຂໍ້ມູນໃໝ່
 
 					// ເພີ່ມຂໍ້ມູນເຂົ້າໄປ FormData
-					this.FormData.push({
-						id: Math.floor(Math.random()*1000),
-						name: this.FormProduct.name,
-						amount: this.FormProduct.amount,
-						price_buy: this.FormProduct.price_buy,
-						price_sell: this.FormProduct.price_sell,
+					// this.FormData.push({
+					// 	id: Math.floor(Math.random()*1000),
+					// 	name: this.FormProduct.name,
+					// 	amount: this.FormProduct.amount,
+					// 	price_buy: this.FormProduct.price_buy,
+					// 	price_sell: this.FormProduct.price_sell,
+					// });
+
+					// ເພີ່ມຂໍ້ມູນເຂົ້າຖານຂໍ້ມູນ
+
+					let newformData = new FormData();
+						newformData.append('name', this.FormProduct.name);
+						newformData.append('amount', this.FormProduct.amount);
+						newformData.append('price_buy', this.FormProduct.price_buy);
+						newformData.append('price_sell', this.FormProduct.price_sell);
+						//newformData.append('file', this.FormProduct.name);
+						newformData.append('acc_type','expense');
+
+					this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+
+							this.$axios.post("/api/store/add", newformData, {headers:{"Content-Type": "multipart/form-date"}})
+							.then((response)=>{
+
+									this.FormShow = false;
+									this.GetStore();
+									
+							}).catch((error)=>{
+								console.log(error);
+							})
 					});
+
+					
+
+
 			} else { // ຖ້າ FormType ບໍ່ເທົ່າ True ( FormType = false ) ໃຫ້ທຳການອັບເດດ ຂໍ້ມູນ ໂດຍອ້າງອິງຈາກ FormID
 
 				
@@ -274,12 +328,34 @@ export default {
 				// this.FormData.find((i)=>i.id == this.FormID).price_sell = this.FormProduct.price_sell;
 				
 
-				let fdata = this.FormData.find((i)=>i.id == this.FormID);
+				// let fdata = this.FormData.find((i)=>i.id == this.FormID);
 
-				fdata.name = this.FormProduct.name;
-				fdata.amount = this.FormProduct.amount;
-				fdata.price_buy = this.FormProduct.price_buy;
-				fdata.price_sell = this.FormProduct.price_sell;
+				// fdata.name = this.FormProduct.name;
+				// fdata.amount = this.FormProduct.amount;
+				// fdata.price_buy = this.FormProduct.price_buy;
+				// fdata.price_sell = this.FormProduct.price_sell;
+
+
+					let newformData = new FormData();
+						newformData.append('name', this.FormProduct.name);
+						newformData.append('amount', this.FormProduct.amount);
+						newformData.append('price_buy', this.FormProduct.price_buy);
+						newformData.append('price_sell', this.FormProduct.price_sell);
+						//newformData.append('file', this.FormProduct.name);
+						let id_update = this.FormID;
+					this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+
+							this.$axios.post(`/api/store/update/${id_update}`, newformData, {headers:{"Content-Type": "multipart/form-date"}})
+							.then((response)=>{
+
+									this.FormShow = false;
+									this.GetStore();
+									
+							}).catch((error)=>{
+								console.log(error);
+							})
+					});
+
 
 			}
 
@@ -333,18 +409,39 @@ export default {
 				
 				
 				// ຄົ້ນຫາ index ໂດຍໃຊ້ id ຄົ້ນຫາໃນຂໍ້ມູນ 
-				let index = this.FormData.map((i)=>i.id).indexOf(id);
+				//let index = this.FormData.map((i)=>i.id).indexOf(id);
 
 				// ໃຊ້ index ທີ່ຄົ້ນຫາເຫັນແລ້ວ ທຳການລຶບອອກ
-				this.FormData.splice(index,1);
-				console.log(index);
+				//this.FormData.splice(index,1);
+				//console.log(index);
 
 				// ສະແດງຂໍ້ຄວາມແຈ້ງເຕືອນໃນການລຶບ
-				this.$swal.fire(
-				'ລຶບສຳເລັດ!',
-				'ຂໍ້ມູນໄດ້ຖຶກລຶບແລ້ວ.',
-				'success'
-				);
+				// this.$swal.fire(
+				// 'ລຶບສຳເລັດ!',
+				// 'ຂໍ້ມູນໄດ້ຖຶກລຶບແລ້ວ.',
+				// 'success'
+				// );
+
+
+				/// ລຶບຂໍ້ມູນ ໃນຖານຂໍ້ມູນ
+
+				this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+
+							this.$axios.delete(`/api/store/delete/${id}`)
+							.then((response)=>{
+
+								this.GetStore();
+								
+								this.$swal.fire(
+									'ລຶບສຳເລັດ!',
+									'ຂໍ້ມູນໄດ້ຖຶກລຶບແລ້ວ.',
+									'success'
+									);
+
+							}).catch((error)=>{
+								console.log(error);
+							})
+					});
 			}
 			});
 			
@@ -355,6 +452,10 @@ export default {
 			return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		},
     },
+
+	created(){
+		this.GetStore();
+	},
 
 	beforeRouteEnter(to, from, next){
 			if(!window.Laravel.isLoggedin_laravel){
