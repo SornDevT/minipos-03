@@ -27,6 +27,7 @@ Route::post('logout',[UserController::class, 'logout']);
 Route::group(['prefix' => 'store', 'middlewar' => 'auth:santum'], function(){
     Route::get('/', [StoreController::class, 'index']);
     Route::post('/add', [StoreController::class, 'add']);
+    Route::post('/edit/{id}', [StoreController::class, 'edit']);
     Route::post('/update/{id}', [StoreController::class, 'update']);
     Route::delete('/delete/{id}', [StoreController::class, 'delete']);
 });

@@ -24,7 +24,145 @@
 						</div>
 					</div>
 				</div>
-        <h1>Page POS</h1>
+        <div class="row">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-body">
+						<input type="text" class="form-control"  placeholder="ຄົ້ນຫາສິນຄ້າ...">
+					</div>
+				</div>
+				<div class="row" style="height: 67vh; overflow: auto;">
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					<div class="col-md-3">
+								<div class="card">
+								<img alt="Image" class="img-fluid card-img-top" src="assets/img/photos/14.jpg">
+								<div class="card-body ">
+									<p class="card-text">name</p>
+									<p class="card-text">12,000 Kip</p>
+								</div>
+							</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-4">bbbb</div>
+		</div>
     </div>
 </template>
 

@@ -158,8 +158,19 @@
                                             </div>
                                     </div>
                                 </div>
+								
+								<div v-if="!FormShow" >
 
-								<div class="table-responsive" v-if="!FormShow" > 
+								
+								<div class="row pb-2 d-flex justify-content-end">
+										<div class="col-md-3">
+												<input type="text" class="form-control"  v-model="SearchProduct" @keyup.enter="GetStore()" placeholder="ຄົ້ນຫາສິນຄ້າ...">
+										
+										</div>
+									</div>
+
+								<div class="table-responsive" >
+
 									<table class="table table-bordered mg-b-0 text-md-nowrap">
 										<thead>
 											<tr>
@@ -171,7 +182,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr v-for="list in FormData" :key="list.id">
+											<tr v-for="list in FormData.data" :key="list.id">
 												<th scope="row"> {{ list.id }} </th>
 												<td> {{ list.name }} </td>
 												<td> {{ list.amount}} </td>
@@ -188,7 +199,13 @@
 											
 										</tbody>
 									</table>
+
+									<pagination :pagination="FormData" @paginate="GetStore($event)" :offset="4" ></pagination>
+
 								</div>
+							</div>
+
+
 							</div>
 						</div>
 					</div>
@@ -228,13 +245,20 @@ export default {
 					numeralDecimalMark: '.',
 					delimiter: ','
 			},
+			SearchProduct:'',
         };
     },
 
     mounted() {
         
     },
-
+	watch:{
+		SearchProduct(){
+			if(this.SearchProduct==''){
+				this.GetStore();
+			}
+		}
+	},
 	computed:{
 		check_form(){
 			if(this.FormProduct.name == '' || this.FormProduct.amount == '' || this.FormProduct.price_buy == '' || this.FormProduct.price_sell == ''){
@@ -255,11 +279,10 @@ export default {
 					this.imagePreview = reader.result;
 				}.bind(this), false);
 		},
-		GetStore(){
+		GetStore(page){
 
 			this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
-
-				this.$axios.get('/api/store')
+				this.$axios.get(`/api/store?page=${page}&search=${this.SearchProduct}`)
 				.then((response)=>{
 						this.FormData = response.data;
 				}).catch((error)=>{
@@ -272,8 +295,14 @@ export default {
         add_product(){
 			
 			///this.$swal('ເພີ່ມຂໍ້ມູນໃໝ່!!!');
-
+			this.imagePreview = window.location.origin + '/assets/img/add-image.jpg';
             this.FormShow = true
+			// clear ຂໍ້ມູນ 
+			this.FormProduct.name = '';
+			this.FormProduct.amount = '';
+			this.FormProduct.price_buy = '';
+			this.FormProduct.price_sell ='';
+
         },
         cancel_product(){
             this.FormShow = false
@@ -300,7 +329,7 @@ export default {
 						newformData.append('amount', this.FormProduct.amount);
 						newformData.append('price_buy', this.FormProduct.price_buy);
 						newformData.append('price_sell', this.FormProduct.price_sell);
-						//newformData.append('file', this.FormProduct.name);
+						newformData.append('file', this.imageProduct);
 						newformData.append('acc_type','expense');
 
 					this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
@@ -341,7 +370,7 @@ export default {
 						newformData.append('amount', this.FormProduct.amount);
 						newformData.append('price_buy', this.FormProduct.price_buy);
 						newformData.append('price_sell', this.FormProduct.price_sell);
-						//newformData.append('file', this.FormProduct.name);
+						newformData.append('file', this.imageProduct);
 						let id_update = this.FormID;
 					this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
 
@@ -374,8 +403,34 @@ export default {
 		edit_product(id){
 			//	alert(id);
 
-			let item = this.FormData.find((i)=>i.id == id);
-			console.log(id)
+			//let item = this.FormData.find((i)=>i.id == id);
+			//console.log(id)
+
+
+			// ດຶງຂໍ້ມູນ ຈາກຖານຂໍ້ມູນ
+			this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
+
+					this.$axios.post(`/api/store/edit/${id}`)
+							.then((response)=>{
+
+								this.FormProduct.name = response.data.name;
+								this.FormProduct.amount = response.data.amount;
+								this.FormProduct.price_buy = response.data.price_buy;
+								this.FormProduct.price_sell = response.data.price_sell;
+
+								//this.imagePreview = response.data.images;
+
+								if(response.data.images){
+									this.imagePreview = window.location.origin + '/assets/img/'+response.data.images;
+								} else {
+									this.imagePreview = window.location.origin + '/assets/img/add-image.jpg';
+								}
+									
+							}).catch((error)=>{
+								console.log(error);
+							})
+
+			});
 			
 			// ສະແດງໜ້າຟອມ
 			this.FormShow = true;
@@ -387,10 +442,10 @@ export default {
 			this.FormID = id;
 
 			// ແອັດຂໍ້ມູນເຂົ້າຟອມ
-			this.FormProduct.name = item.name;
-			this.FormProduct.amount = item.amount;
-			this.FormProduct.price_buy = item.price_buy;
-			this.FormProduct.price_sell = item.price_sell;
+			// this.FormProduct.name = item.name;
+			// this.FormProduct.amount = item.amount;
+			// this.FormProduct.price_buy = item.price_buy;
+			// this.FormProduct.price_sell = item.price_sell;
 		},
 		del_product(id){
 
