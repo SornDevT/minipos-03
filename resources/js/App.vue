@@ -1736,4 +1736,8 @@ export default {
 .new-btn{
     padding: 8px;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
 </style>

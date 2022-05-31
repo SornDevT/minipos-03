@@ -20,7 +20,7 @@ class StoreController extends Controller
         $store = Store::where("name","LIKE","%{$Search}%")
         ->orWhere("price_buy","LIKE","%{$Search}%")
         ->orderBy('created_at','desc')
-        ->paginate(5)
+        ->paginate(15)
         ->toArray();
 
         return array_reverse($store);
