@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\StoreController;
+use App\Http\Controllers\API\TransectionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +33,13 @@ Route::group(['prefix' => 'store', 'middlewar' => 'auth:santum'], function(){
     Route::post('/update/{id}', [StoreController::class, 'update']);
     Route::delete('/delete/{id}', [StoreController::class, 'delete']);
 });
+
+Route::group(['prefix' => 'transection', 'middlewar' => 'auth:santum'], function(){
+    Route::post('/', [TransectionController::class, 'index']);
+    Route::post('/add', [TransectionController::class, 'add']);
+
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

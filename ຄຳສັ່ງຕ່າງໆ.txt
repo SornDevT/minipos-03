@@ -7,6 +7,8 @@
 - ຄຳສັ່ງໃນການສ້າງ Controller ຊື່ StoreController, API ຈະເປັນໂຟນເດີ້,  ຄຳສັ່ງ: php artisan make:controller API/StoreController
 - ຄຳສັ່ງໃນການ Generate ສ້າງຕາຕະລາງ ເຂົ້າຖານຂໍ້ມູນ MySQL ຄຳສັ່ງ: php artisan migrate 
 
+- ຄຳສັ່ງ ຕິດຕັ້ງ Library ອັບໂຫລດຮູບພາບ: composer require intervention/image
+
 
 + ຄຳສັ່ງ Git & GitHub ພື້ນຖານ
 
