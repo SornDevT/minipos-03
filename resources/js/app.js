@@ -10,6 +10,8 @@ import Cleave from 'vue-cleave-component';
 
 import Pagination from "./Components/Pagination.vue";
 
+import dashcard from "./Components/Dash_card.vue";
+
 require('./bootstrap');
 
 const app = createApp(App);
@@ -17,5 +19,6 @@ app.config.globalProperties.$axios = axios;
 app.use(router);
 app.use(VueSweetalert2);
 app.use(Cleave);
+app.component('dashcard',dashcard);
 app.component('pagination',Pagination);
 app.mount("#vue-app");

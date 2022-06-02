@@ -32,7 +32,7 @@
 															<label>ອີເມວລ໌</label> <input class="form-control" placeholder="ປ້ອນອີເມວລ໌ ຂອງທ່ານ..." type="text" v-model="email">
 														</div>
 														<div class="form-group">
-															<label>ລະຫັດຜ່ານ</label> <input class="form-control" placeholder="ປ້ອນລະຫັດຜ່ານ ຂອງທ່ານ..." type="password" v-model="password">
+															<label>ລະຫັດຜ່ານ</label> <input class="form-control" placeholder="ປ້ອນລະຫັດຜ່ານ ຂອງທ່ານ..." @keyup.enter="Login()" type="password" v-model="password">
 														</div><button class="btn btn-main-primary btn-block" @click="Login()">ເຂົ້າສູ່ລະບົບ</button>
 
 														<div class="alert alert-warning mt-2" role="alert" v-if="ShowError">

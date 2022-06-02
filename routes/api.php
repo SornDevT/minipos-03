@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\StoreController;
 use App\Http\Controllers\API\TransectionController;
+use App\Http\Controllers\API\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::group(['prefix' => 'transection', 'middlewar' => 'auth:santum'], function
     Route::post('/', [TransectionController::class, 'index']);
     Route::post('/add', [TransectionController::class, 'add']);
 
+});
+
+Route::group(['prefix' => 'report', 'middlewar' => 'auth:santum'], function(){ 
+    Route::post('/', [ReportController::class, 'index']);
+    Route::post('/dashcard', [ReportController::class, 'dashcard']);
 });
 
 

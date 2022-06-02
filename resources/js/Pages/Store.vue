@@ -25,88 +25,8 @@
 					</div>
 				</div>
         <div class="row">
-					<div class="col-sm-12 col-lg-6 col-xl-3">
-						<div class="card card-img-holder">
-							<div class="card-body list-icons">
-								<div class="clearfix">
-									<div class="float-end  mt-2">
-										<span class="text-primary ">
-											<i class="si si-basket-loaded tx-30"></i>
-										</span>
-									</div>
-									<div class="float-start text-end">
-										<p class="card-text text-muted mb-1">Services</p>
-										<h3>$124</h3>
-									</div>
-								</div>
-								<div class="card-footer p-0">
-									<p class="text-muted mb-0 pt-4"><i class="si si-arrow-down-circle text-warning me-1-20  me-2" aria-hidden="true"></i>Daily Orders</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 col-lg-6 col-xl-3">
-						<div class="card card-img-holder">
-							<div class="card-body list-icons">
-								<div class="clearfix">
-									<div class="float-end  mt-2">
-										<span class="text-primary ">
-											<i class="si si-credit-card tx-30"></i>
-										</span>
-									</div>
-									<div class="float-start">
-										<p class="card-text text-muted mb-1">Sources</p>
-										<h3>$124</h3>
-									</div>
-								</div>
-								<div class="card-footer p-0">
-									<p class="text-muted mb-0 pt-4"><i class="si si-arrow-up-circle text-success me-2"></i>Less Sales</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 col-lg-6 col-xl-3">
-						<div class="card card-img-holder">
-							<div class="card-body list-icons">
-								<div class="clearfix">
-									<div class="float-end  mt-2">
-										<span class="text-primary">
-											<i class="si si-chart tx-30"></i>
-										</span>
-									</div>
-									<div class="float-start">
-										<p class="card-text text-muted mb-1">Income</p>
-										<h3>21%</h3>
-									</div>
-								</div>
-								<div class="card-footer p-0">
-									<p class="text-muted mb-0 pt-4"><i class="si si-exclamation text-info me-2"></i>From
-										Last Month</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 col-lg-6 col-xl-3">
-						<div class="card card-img-holder">
-							<div class="card-body list-icons">
-								<div class="clearfix">
-									<div class="float-end  mt-2">
-										<span class="text-primary">
-											<i class="si si-social-facebook tx-30"></i>
-										</span>
-									</div>
-									<div class="float-start">
-										<p class="card-text text-muted mb-1">Followers</p>
-										<h3>24K</h3>
-									</div>
-								</div>
-								<div class="card-footer p-0">
-									<p class="text-muted mb-0 pt-4"><i class="si si-check me-1 text-primary me-2"></i>
-										Recent History</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					
+					<dashcard/>
 					
 
                     <div class="col-xl-12">
@@ -184,8 +104,8 @@
 										<tbody>
 											<tr v-for="list in FormData.data" :key="list.id">
 												<th scope="row"> {{ list.id }} </th>
-												<td> {{ list.name }} </td>
-												<td> {{ list.amount}} </td>
+												<td style="vertical-align: middle;" > {{ list.name }} </td>
+												<td > {{ list.amount}} </td>
 												<td> {{ formatPrice(list.price_buy)}} </td>
 												<td class=" text-center">
                                                     <div class="btn-icon-list justify-content-center">
@@ -522,6 +442,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>
