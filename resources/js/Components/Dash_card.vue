@@ -9,9 +9,9 @@
 											<i class="si si-basket-loaded tx-30"></i>
 										</span>
 									</div>
-									<div class="float-start text-end">
-										<p class="card-text text-muted mb-1">Services</p>
-										<h3>$124</h3>
+									<div class="float-start">
+										<p class="card-text text-muted mb-1">ລາຍຮັບ</p>
+										<h4>{{formatPrice(sum_income)}} ກີບ</h4>
 									</div>
 								</div>
 								<div class="card-footer p-0">
@@ -30,8 +30,8 @@
 										</span>
 									</div>
 									<div class="float-start">
-										<p class="card-text text-muted mb-1">Sources</p>
-										<h3>$124</h3>
+										<p class="card-text text-muted mb-1">ລາຍຈ່າຍ</p>
+										<h4>{{formatPrice(sum_expense)}} ກີບ</h4>
 									</div>
 								</div>
 								<div class="card-footer p-0">
@@ -50,8 +50,8 @@
 										</span>
 									</div>
 									<div class="float-start">
-										<p class="card-text text-muted mb-1">Income</p>
-										<h3>21%</h3>
+										<p class="card-text text-muted mb-1">ກຳໄລ</p>
+										<h4>{{formatPrice(sum_profit)}} ກີບ</h4>
 									</div>
 								</div>
 								<div class="card-footer p-0">
@@ -71,8 +71,8 @@
 										</span>
 									</div>
 									<div class="float-start">
-										<p class="card-text text-muted mb-1">Followers</p>
-										<h3>24K</h3>
+										<p class="card-text text-muted mb-1">ສະຕ໋ອກສິນຄ້າ</p>
+										<h3>{{formatPrice(store)}}</h3>
 									</div>
 								</div>
 								<div class="card-footer p-0">
@@ -100,16 +100,30 @@ export default {
     mounted() {
         
     },
-
+	computed:{
+        sum_income(){
+        return this.income.reduce((num, item) => num + item.price_sell, 0);
+        },
+        sum_expense(){
+            return this.expense.reduce((num, item) => num + item.price_sell, 0);
+        },
+        sum_profit(){
+            return this.sum_income-this.sum_expense;
+        }
+    },
     methods: {
-        GetData(page){
+		formatPrice(value) {
+			let val = (value / 1).toFixed(0).replace(",", ".");
+			return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		},
+        GetData(){
 
 			this.$axios.get("/sanctum/csrf-cookie").then((response)=>{
 				this.$axios.get(`/api/report/dashcard`)
 				.then((response)=>{
 						this.income = response.data.income;
-						this.expense = response.data.income;
-						this.store = response.data.income;
+						this.expense = response.data.expense;
+						this.store = response.data.store;
 				}).catch((error)=>{
 					console.log(error);
 				})
@@ -118,6 +132,9 @@ export default {
 
 		},
     },
+	created(){
+		this.GetData();
+	}
 };
 </script>
 

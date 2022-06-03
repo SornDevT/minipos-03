@@ -43,7 +43,7 @@ Route::group(['prefix' => 'transection', 'middlewar' => 'auth:santum'], function
 
 Route::group(['prefix' => 'report', 'middlewar' => 'auth:santum'], function(){ 
     Route::post('/', [ReportController::class, 'index']);
-    Route::post('/dashcard', [ReportController::class, 'dashcard']);
+    Route::get('/dashcard', [ReportController::class, 'dashcard']);
 });
 
 

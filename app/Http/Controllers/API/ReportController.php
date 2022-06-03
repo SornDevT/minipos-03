@@ -40,7 +40,14 @@ class ReportController extends Controller
         
         $income = Transection::where('tran_type', 'income')->get();
         $expense = Transection::where('tran_type', 'expense')->get();
-        $store = Transection::where('tran_type', 'expense')->get();
+        $store = Store::where('amount','!=','0')->get();
+
+        $response = [
+            'income'=> $income,
+            'expense'=> $expense,
+            'store'=> count($store)
+        ];
+        return response()->json($response);
     }
 
     

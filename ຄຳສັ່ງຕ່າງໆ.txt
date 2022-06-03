@@ -28,4 +28,11 @@
 
 - git add . && git commit -m "ຄຳອະທິບາຍ" && git push
 
+-------------------------- ຄຳສັ່ງ deproy project ເພື່ອອັບໂຫລດຂື້ນ server
+
+- npm run prod
+- php artisan route:cache 
+- php artisan view:cache 
+- composer install --optimize-autoloader --no-dev
+
 
