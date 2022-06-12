@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <div class="breadcrumb-header justify-content-between">
@@ -90,6 +91,10 @@
 									</div>
 
 								<div class="table-responsive" >
+									 
+									
+					
+									
 
 									<table class="table table-bordered mg-b-0 text-md-nowrap">
 										<thead>
@@ -104,7 +109,11 @@
 										<tbody>
 											<tr v-for="list in FormData.data" :key="list.id">
 												<th scope="row"> {{ list.id }} </th>
-												<td style="vertical-align: middle;" > {{ list.name }} </td>
+												<td style="vertical-align: middle;" > {{ list.name }} <br> 
+													{{timeago(list.created_at)}}
+												
+													
+												 </td>
 												<td > {{ list.amount}} </td>
 												<td> {{ formatPrice(list.price_buy)}} </td>
 												<td class=" text-center">
@@ -134,12 +143,16 @@
 				</div>
     </div>
 </template>
-
 <script>
+
+import moment from "moment";
+//import VueMomentsAgo from 'vue-moments-ago'
 
 export default {
     name: 'MyWebAppStore',
-
+	components:{
+		moment
+	},
     data() {
         return {
 			imagePreview: window.location.origin + '/assets/img/add-image.jpg',
@@ -189,6 +202,9 @@ export default {
 		}
 	},
     methods: {
+		timeago(value){
+			return moment(value).fromNow();
+		},
 		onSeclected(event){
 				console.log(event.target.files[0]);
 
