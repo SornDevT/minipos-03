@@ -110,6 +110,7 @@
 											<tr v-for="list in FormData.data" :key="list.id">
 												<th scope="row"> {{ list.id }} </th>
 												<td style="vertical-align: middle;" > {{ list.name }} <br> 
+													
 													{{timeago(list.created_at)}}
 												
 													
